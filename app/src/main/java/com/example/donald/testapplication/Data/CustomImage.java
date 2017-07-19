@@ -3,6 +3,8 @@ package com.example.donald.testapplication.Data;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.agilie.dribbblesdk.domain.Images;
@@ -14,7 +16,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 /**
  * Created by Donald on 24.06.2017.
  */
-public class CustomImage {
+public class CustomImage implements Parcelable{
 
     String title;
     String description;
@@ -34,6 +36,25 @@ public class CustomImage {
         this.normal = cursor.getString(cursor.getColumnIndex(DBCustomViews.NAME_COLLUMN_NORMAL));
         this.teaser = cursor.getString(cursor.getColumnIndex(DBCustomViews.NAME_COLLUMN_TEASER));
     }
+
+    protected CustomImage(Parcel in) {
+        title = in.readString();
+        description = in.readString();
+        normal = in.readString();
+        teaser = in.readString();
+    }
+
+    public static final Creator<CustomImage> CREATOR = new Creator<CustomImage>() {
+        @Override
+        public CustomImage createFromParcel(Parcel in) {
+            return new CustomImage(in);
+        }
+
+        @Override
+        public CustomImage[] newArray(int size) {
+            return new CustomImage[size];
+        }
+    };
 
     public String getTitle(){
         return title;
@@ -78,5 +99,18 @@ public class CustomImage {
             }
         }
         this.description = resString;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(title);
+        parcel.writeString(description);
+        parcel.writeString(normal);
+        parcel.writeString(teaser);
     }
 }

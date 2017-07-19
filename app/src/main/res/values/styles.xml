@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/Jobs_Hiring</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:navigationBarColor">@color/Playbook</item>
+        <item name="android:navigationBarColor">@color/LinkBlue</item>
     </style>
 
 </resources>

@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="80dp"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/custom_horizontal_margin"
+    android:paddingLeft="@dimen/custom_horizontal_margin"
     android:paddingBottom="@dimen/activity_horizontal_margin"
     >
 
