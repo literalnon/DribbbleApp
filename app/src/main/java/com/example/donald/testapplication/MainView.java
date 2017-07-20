@@ -12,7 +12,8 @@ import com.example.donald.testapplication.Presenter.BasePresenter;
 public interface MainView extends Parcelable{
     BasePresenter getPresenter();
     void startFragment();
-    void startFragment(Fragment fragment);
+    void hideNormalstartListFragment();
+    void hideListstartNormalFragment(Fragment fragment);
     void stopProgressBar();
     void startProgressBar();
 }

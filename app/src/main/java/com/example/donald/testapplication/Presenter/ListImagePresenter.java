@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.agilie.dribbblesdk.domain.Shot;
@@ -16,7 +15,6 @@ import com.example.donald.testapplication.Data.CustomImage;
 import com.example.donald.testapplication.MainView;
 import com.example.donald.testapplication.Model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import retrofit2.Call;
@@ -138,8 +136,8 @@ public class ListImagePresenter extends BasePresenter<Model, MainView> implement
         this.view = view;
     }
 
-    public void startFragment(Fragment fragment){
-        view.startFragment(fragment);
+    public void hideListFragment(Fragment fragment){
+        view.hideListstartNormalFragment(fragment);
     }
 
     public void stopProgressBar() {

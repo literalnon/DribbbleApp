@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.agilie.dribbblesdk.service.auth.DribbbleAuthHelper;
 import com.example.donald.testapplication.Fragment.ListImageFragment;
+import com.example.donald.testapplication.Fragment.NormalImageFragment;
 import com.example.donald.testapplication.Presenter.BasePresenter;
 import com.example.donald.testapplication.Presenter.ListImagePresenter;
 import com.example.donald.testapplication.MainView;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
     private ListImageFragment listImgFragment;
 
     public Context context;
+    private NormalImageFragment normalFragment;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -47,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements MainView{
         }
             presenter.bindView(this);
 
-        Toast.makeText(this, "authorize", Toast.LENGTH_SHORT).show();
         authorize();
 
         //  DribbbleAuthHelper.logout(this, credentials);
@@ -79,23 +80,23 @@ public class MainActivity extends AppCompatActivity implements MainView{
     }
 
     @Override
-    public void startFragment(){
+    public void startFragment() {
         stopProgressBar();
-
-        FragmentManager manager = getFragmentManager();
-        listImgFragment = (ListImageFragment)manager.findFragmentByTag(LIST_IMAGE_FRAGMENT_KEY);
-        if(listImgFragment == null) {
-            listImgFragment = ListImageFragment.newInstance(presenter.getToken());
-            manager.beginTransaction().add(R.id.main_layout, listImgFragment, LIST_IMAGE_FRAGMENT_KEY).commit();
-        }
-
-
-
+        listImgFragment = ListImageFragment.newInstance(presenter.getToken());
+        getFragmentManager().beginTransaction().add(R.id.main_layout, listImgFragment).commit();
     }
 
     @Override
-    public void startFragment(Fragment fragment){
-        getFragmentManager().beginTransaction().hide(listImgFragment).add(R.id.main_layout, fragment, NORMAL_IMAGE_FRAGMENT_KEY).commit();
+    public void hideListstartNormalFragment(Fragment fragment){
+        //stopProgressBar();
+        FragmentManager manager = getFragmentManager();
+        normalFragment = (NormalImageFragment)fragment;
+        manager.beginTransaction().hide(listImgFragment).add(R.id.main_layout, normalFragment).commit();
+    }
+
+    @Override
+    public void hideNormalstartListFragment(){
+        getFragmentManager().beginTransaction().remove(normalFragment).show(listImgFragment).commit();
     }
 
     @Override
@@ -121,5 +122,14 @@ public class MainActivity extends AppCompatActivity implements MainView{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(listImgFragment.isHidden()) {
+            hideNormalstartListFragment();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

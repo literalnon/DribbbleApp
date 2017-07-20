@@ -54,7 +54,7 @@ public class RecycleImagesAdapter extends RecyclerView.Adapter<ImagesViewHolder>
                 Bundle bundle = new Bundle();
                 bundle.putInt(INT_POSITION, position);
                 fragment.setArguments(bundle);
-                presenter.startFragment(fragment);
+                presenter.hideListFragment(fragment);
             }
         });
     }
